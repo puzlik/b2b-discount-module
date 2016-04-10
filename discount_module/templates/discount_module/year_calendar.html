@@ -1,0 +1,35 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'discount_module/style.css' %}" />
+
+ <div class="link-to-year">
+  <div><p><a href="{% url 'year-calendar' prev %}"><<</a></p></div>
+  <div><p>{{ year }}<p></div>
+  <div><p><a href="{% url 'year-calendar' next %}">>></a></p></div>
+ </div>
+<div class="calendar">
+ <div>
+  <div><p>{{ january }}</p><p>JAN</p></div>
+  <div><p>{{ february }}</p><p>FEB</p></div>
+  <div><p>{{ march }}</p><p>MAR</p></div>
+  <div><p>{{ april }}</p><p>APR</p></div>
+ </div>
+ <div>
+  <div><p>{{ may }}</p><p>MAY</p></div>
+  <div><p>{{ june }}</p><p>JUN</p></div>
+  <div><p>{{ july }}</p><p>JUL</p></div>
+  <div><p>{{ august }}</p><p>AUG</p></div>
+ </div>
+ <div>
+  <div><p>{{ september }}</p><p>SEP</p></div>
+  <div><p>{{ october }}</p><p>OCT</p></div>
+  <div><p>{{ november }}</p><p>NOV</p></div>
+  <div><p>{{ december }}</p><p>DEC</p></div>
+ </div>
+</div>
+<div>
+  <h3>Go to <a href="{% url 'admin:index' %}">Admin Panel</a></h3>  
+</div>
+<div>
+  <h3>View <a href="{% url 'calendar' %}">Agreements Calendar</a> (as JSON) </h3>
+</div>

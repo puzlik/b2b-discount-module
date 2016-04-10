@@ -1,0 +1,49 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'discount_module/style.css' %}" />
+
+<div>
+  <h3>Go to <a href="{% url 'admin:index' %}">Admin Panel</a></h3>  
+</div>
+<div>
+  <h3>View <a href="{% url 'calendar' %}">Agreements Calendar</a> (as JSON) </h3>
+  <h3>View <a href="{% url 'year-calendar' 2016 %}">Agreements Calendar</a> (almost cute variant) </h3>
+</div>
+
+{% if not empty %}
+<div class="agreements">
+  <h2>All agreements</h2>
+  {% if country %}
+  <div>
+  <h4>Countries: </h4>
+  <ul>
+  {% for count in country %}
+    <li>{{ count }}</li>
+  {% endfor %}
+  <ul>
+  </div>
+  {% endif %}
+
+  {% if negotiator %}
+  <div>
+  <h4>Negotiators: </h4>
+  <ul>
+  {% for negot in negotiator %}
+    <li>{{ negot }}</li>
+  {% endfor %}
+  <ul>
+  </div>
+  {% endif %}
+
+  {% if company %}
+  <div>
+  <h4>Companies: </h4>
+  <ul>
+  {% for comp in company %}
+    <li>{{ comp }}</li>
+  {% endfor %}
+  </ul>
+  </div>
+  {% endif %}
+</div>
+{% endif %}

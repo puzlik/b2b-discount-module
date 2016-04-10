@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class Negotiator(models.Model):
@@ -28,8 +29,9 @@ class Agreement(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     company = models.ForeignKey(Company)
-    v_export = models.IntegerField()
-    v_import = models.IntegerField()
+    negotiator = models.ForeignKey(Negotiator)
+    v_export = models.IntegerField(blank=True)
+    v_import = models.IntegerField(blank=True)
     def __str__(self):
         return '%s - %s (%s)' %(self.start_date, self.end_date, self.company)
 
@@ -37,8 +39,38 @@ class Agreement(models.Model):
 class Period(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
+    status = models.BooleanField(blank=True)
     agreement = models.ForeignKey(Agreement)
-    def status_of_period(self):
-        return self.end_date <= datetime.today()
+
+    def clean(self):
+	#new period in agreement's period
+	if (self.start_date < self.agreement.start_date) \
+	   or (self.end_date >self.agreement.end_date):
+	    raise ValidationError('Period is outside of the agreement')
+
+        #periods don't intersect
+	if self.__class__.objects.filter(agreement__id=self.agreement.id).exists():
+	    periods = self.__class__.objects.filter(agreement__id=self.agreement.id)
+	    for per in periods:
+	        if not per==self:
+		    if per.end_date >= self.start_date >= per.start_date \
+		       or per.end_date >= self.end_date >= per.start_date:
+		        raise ValidationError('Period intersects with an existing period')
+	"""#check status
+	if self.status == True and not (self.end_date == self.__class__.objects.filter(agreement__id=self.agreement.id).latest('end_date').end_date):
+	    raise ValidationError('This period is not last')
+
     def __str__(self):
         return '%s - %s' %(self.start_date, self.end_date)
+
+    def set_status(self):
+	#auto set status
+	if self.end_date == self.__class__.objects.filter(agreement__id=self.agreement.id).latest('end_date').end_date:
+	    self.__class__.objects.filter(status=True).update(status=False)
+	    return True
+	else:
+	    return False
+    def save(self, *args, **kwargs):
+	super(Period, self).save(*args, **kwargs)
+	self.status = self.set_status()
+	super(Period, self).save(*args, **kwargs)"""
