@@ -14,7 +14,10 @@ a {
     border: 2px #66cdaa solid;
     border-radius: 20px;
 }
-.agreements div h4 {
+.agreements div:first-child{
+    background-color: #d1f0e5;
+}
+.agreements div h4, h2 {
     text-align: center;
 }
 .agreements div ul {
@@ -41,6 +44,11 @@ div.link-to-year div:nth-child(2){
     width: 270px;
     background-color: #fff;
 } 
+div.link-to-year div.links{
+    width: 400px;
+    background-color: #fff;
+    text-align: right;
+}
 div.calendar {
     display:table; 
     border-spacing:15px;

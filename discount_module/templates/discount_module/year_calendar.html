@@ -6,6 +6,11 @@
   <div><p><a href="{% url 'year-calendar' prev %}"><<</a></p></div>
   <div><p>{{ year }}<p></div>
   <div><p><a href="{% url 'year-calendar' next %}">>></a></p></div>
+  <div class="links">
+  <h3>Go to <a href="{% url 'index' %}">Index Page</a></h3>
+  <h3>Go to <a href="{% url 'admin:index' %}">Admin Panel</a></h3>  
+  <h3>View <a href="{% url 'calendar' %}">Agreements Calendar</a> (as JSON) </h3>
+</div>
  </div>
 <div class="calendar">
  <div>
@@ -27,9 +32,4 @@
   <div><p>{{ december }}</p><p>DEC</p></div>
  </div>
 </div>
-<div>
-  <h3>Go to <a href="{% url 'admin:index' %}">Admin Panel</a></h3>  
-</div>
-<div>
-  <h3>View <a href="{% url 'calendar' %}">Agreements Calendar</a> (as JSON) </h3>
-</div>
+

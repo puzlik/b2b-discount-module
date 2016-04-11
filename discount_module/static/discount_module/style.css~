@@ -14,19 +14,16 @@ a {
     border: 2px #66cdaa solid;
     border-radius: 20px;
 }
-.agreements div h4 {
+.agreements div:first-child{
+    background-color: #d1f0e5;
+}
+.agreements div h4, h2 {
     text-align: center;
 }
 .agreements div ul {
     list-style-type: circle;
 }
-div.calendar {
-    display:table; 
-    border-spacing:15px;
-    margin: 0 10px 10px;
-    padding: 0 10px 10px;
-    text-align: center;
-}
+
 div.link-to-year {
     display:table; 
     border-spacing:15px;
@@ -47,6 +44,17 @@ div.link-to-year div:nth-child(2){
     width: 270px;
     background-color: #fff;
 } 
+div.link-to-year div.links{
+    width: 400px;
+    background-color: #fff;
+}
+div.calendar {
+    display:table; 
+    border-spacing:15px;
+    margin: 0 10px 10px;
+    padding: 0 10px 10px;
+    text-align: center;
+}
 div.calendar div{
     display:table-row;
     background-color: #d8d8d8;

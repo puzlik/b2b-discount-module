@@ -58,12 +58,12 @@ class Period(models.Model):
 		        raise ValidationError('Period intersects with an existing period')
 	"""#check status
 	if self.status == True and not (self.end_date == self.__class__.objects.filter(agreement__id=self.agreement.id).latest('end_date').end_date):
-	    raise ValidationError('This period is not last')
+	    raise ValidationError('This period is not last')"""
 
     def __str__(self):
         return '%s - %s' %(self.start_date, self.end_date)
 
-    def set_status(self):
+    """def set_status(self):
 	#auto set status
 	if self.end_date == self.__class__.objects.filter(agreement__id=self.agreement.id).latest('end_date').end_date:
 	    self.__class__.objects.filter(status=True).update(status=False)

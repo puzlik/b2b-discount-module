@@ -27,3 +27,8 @@
   <div><p>{{ december }}</p><p>DEC</p></div>
  </div>
 </div>
+<div class="links">
+  <h3>Go to <a href="{% url 'index' %}">Index Page</a></h3>
+  <h3>Go to <a href="{% url 'admin:index' %}">Admin Panel</a></h3>  
+  <h3>View <a href="{% url 'calendar' %}">Agreements Calendar</a> (as JSON) </h3>
+</div>

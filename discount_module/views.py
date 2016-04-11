@@ -4,8 +4,7 @@ from django.http import JsonResponse
 from .models import Agreement, Period, Country, Negotiator, Company
 
 def index(request):
-    context={}
-    
+    context = {}
     for sm in ('country', 'negotiator', 'company'):
         if request.GET.get(sm)==None:
 	    context[sm]=False

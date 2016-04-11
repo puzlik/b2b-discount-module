@@ -4,14 +4,12 @@ from django.http import JsonResponse
 from .models import Agreement, Period, Country, Negotiator, Company
 
 def index(request):
-    context={}
-    
     for sm in ('country', 'negotiator', 'company'):
         if request.GET.get(sm)==None:
 	    context[sm]=False
 	else:
 	    context[sm]=[]
-    context['empty'] = context.values()==[False]*3
+    context = {'empty': context.values()==[False]*3}
 
     if request.GET.get('country'):
         for pk in str(request.GET.get('country')).split(','):
@@ -56,7 +54,7 @@ def year_calendar(request, pk):
                 context_list[per.month-1] += 1
 		agr_ids.append(agr.id)
     months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
-    context = {'year': pk, 'prev': pk-1, 'next': pk+1}
+    context = {'year': pk, 'prev': int(pk)-1, 'next': int(pk)+1}
     for m in months:
 	context[m] = context_list[months.index(m)]
     return render(request, 'discount_module/year_calendar.html', context)
