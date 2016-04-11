@@ -44,10 +44,11 @@ div.link-to-year div:nth-child(2){
     width: 270px;
     background-color: #fff;
 } 
-div.link-to-year div.links{
-    width: 400px;
+div.links{
+    width: 100%;
     background-color: #fff;
-    text-align: right;
+    margin: 10px 10px 0; 
+    padding-left: 30px;
 }
 div.calendar {
     display:table; 
