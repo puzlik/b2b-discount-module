@@ -14,6 +14,7 @@ class Negotiator(models.Model):
 class Country(models.Model):
     iso_code = models.PositiveSmallIntegerField()
     name = models.CharField(max_length=50)
+    verbose_name_plural = "countries"
     def __str__(self):
         return self.name
 
@@ -21,6 +22,8 @@ class Country(models.Model):
 class Company(models.Model):
     title = models.CharField(max_length=100)
     country = models.ForeignKey(Country)
+    class Meta:
+        verbose_name_plural = "Countries"
     def __str__(self):
         return self.title
 
@@ -39,7 +42,7 @@ class Agreement(models.Model):
 class Period(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
-    #status = models.BooleanField(blank=True)
+    status = models.BooleanField(blank=True, editable=False, default=False)
     agreement = models.ForeignKey(Agreement)
 
     def clean(self):
@@ -58,19 +61,31 @@ class Period(models.Model):
 		        raise ValidationError('Period intersects with an existing period')
 	"""#check status
 	if self.status == True and not (self.end_date == self.__class__.objects.filter(agreement__id=self.agreement.id).latest('end_date').end_date):
-	    raise ValidationError('This period is not last')
+	    raise ValidationError('This period is not last')"""
 
     def __str__(self):
-        return '%s - %s' %(self.start_date, self.end_date)
+        return '%s - %s (%s)' %(self.start_date, self.end_date, self.agreement.company)
 
     def set_status(self):
 	#auto set status
 	if self.end_date == self.__class__.objects.filter(agreement__id=self.agreement.id).latest('end_date').end_date:
-	    self.__class__.objects.filter(status=True).update(status=False)
+	    for obj in self.__class__.objects.filter(status=True):
+                obj.status = False
+                obj.save()
 	    return True
 	else:
 	    return False
+
     def save(self, *args, **kwargs):
-	super(Period, self).save(*args, **kwargs)
+        super(Period, self).save(*args, **kwargs)
 	self.status = self.set_status()
-	super(Period, self).save(*args, **kwargs)"""
+	super(Period, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.status == True:
+            super(Period, self).delete(*args, **kwargs)
+            obj = self.__class__.objects.filter(agreement__id=self.agreement.id).latest('end_date')
+            obj.status = True
+            obj.save()
+        else:
+            super(Period, self).delete(*args, **kwargs)

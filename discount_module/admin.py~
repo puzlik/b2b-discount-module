@@ -24,14 +24,12 @@ class CompanyAdmin(admin.ModelAdmin):
     list_filter = ['country']
     ordering = ['title']
     search_fields = ['title', 'country__name']
+    verbose_name_plural = ["companies"]
 
 class CountryAdmin(admin.ModelAdmin):
     list_display = ('name', 'iso_code')
     ordering = ['name']
     search_fields = ['iso_code', 'name']
-
-class NegotiatorAdmin(admin.ModelAdmin):
-    list_display = ('negotiator', 'user__email')
 
 admin.site.register(Agreement, AgreementAdmin)
 
@@ -39,4 +37,4 @@ admin.site.register(Company, CompanyAdmin)
 
 admin.site.register(Country, CountryAdmin)
 
-admin.site.register(Negotiator, NegotiatorAdmin)
+admin.site.register(Negotiator)

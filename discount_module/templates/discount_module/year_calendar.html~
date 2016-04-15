@@ -1,13 +1,9 @@
+{% extends "discount_module/base_agr.html" %}
+
 {% load staticfiles %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'discount_module/style.css' %}" />
 
-<div class="links">
-  <h3><a href="{% url 'index' %}">Index</a>&emsp;
-     <a href="{% url 'admin:index' %}">Admin Panel</a>&emsp;
-     <a href="{% url 'calendar' %}">Agreements</a> (as JSON)</h4>
-</div>
-
+{% block content %}
 <div class="link-to-year">
   <div><p><a href="{% url 'year-calendar' prev %}"><<</a></p></div>
   <div><p>{{ year }}<p></div>
@@ -34,4 +30,4 @@
   <div><p>{{ december }}</p><p>DEC</p></div>
  </div>
 </div>
-
+{% endblock content %}

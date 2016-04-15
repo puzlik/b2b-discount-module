@@ -1,0 +1,45 @@
+{% extends "discount_module/base_agr.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+{% if not empty %}
+<div class="agreements">
+  <div>
+    <h2>All agreements</h2>
+  </div>
+  {% if country %}
+  <div>
+  <h4>Countries: </h4>
+  <ul>
+  {% for count in country %}
+    <li>{{ count }}</li>
+  {% endfor %}
+  <ul>
+  </div>
+  {% endif %}
+
+  {% if negotiator %}
+  <div>
+  <h4>Negotiators: </h4>
+  <ul>
+  {% for negot in negotiator %}
+    <li>{{ negot }}</li>
+  {% endfor %}
+  <ul>
+  </div>
+  {% endif %}
+
+  {% if company %}
+  <div>
+  <h4>Companies: </h4>
+  <ul>
+  {% for comp in company %}
+    <li>{{ comp }}</li>
+  {% endfor %}
+  </ul>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock content %}

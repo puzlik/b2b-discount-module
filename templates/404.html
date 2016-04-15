@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Not Found</title>
+  <meta charset="utf-8">
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+</head>
+<body>
+<div class="page-404">
+  <h1>Sorry, page is not found</h1>
+  <h3> You are at <i>B2B Discount Module</i></h3>
+  <h4> To get more information you can visit:</h4>
+  <ul>
+    <li><a href="{% url 'admin:index' %}">Admin Panel</a></li>  
+    <li><a href="{% url 'calendar' %}">Agreements Calendar (as JSON)</a></li>
+    <li><a href="{% url 'year-calendar' 2016 %}">Calendar (almost cute variant) </a></li>
+ </ul>
+</div>
+</body>
+</html>

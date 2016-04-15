@@ -1,13 +1,9 @@
+{% extends "discount_module/base_agr.html" %}
+
 {% load staticfiles %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'discount_module/style.css' %}" />
 
-<div>
-  <h3>Go to <a href="{% url 'admin:index' %}">Admin Panel</a></h3>  
-  <h3>View <a href="{% url 'calendar' %}">Agreements Calendar</a> (as JSON) </h3>
-  <h3>View <a href="{% url 'year-calendar' 2016 %}">Agreements Calendar</a> (almost cute variant) </h3>
-</div>
-
+{% block content %}
 {% if not empty %}
 <div class="agreements">
   <div>
@@ -47,3 +43,4 @@
   {% endif %}
 </div>
 {% endif %}
+{% endblock content %}

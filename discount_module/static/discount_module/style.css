@@ -2,8 +2,33 @@ body {
     padding-left: 15px;
 }
 a {
-    color: #008080;
+    color: #003333;
     text-decoration: none;
+}
+div.nav-agr ul li {
+    display: inline;
+    width: 40px;
+    height: 40px;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    font-weight: 600;
+    background-color: #e0f5ee;
+    border: 1px #84d7bb solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+}
+div.nav-agr ul li:hover{
+    text-decoration: underline;
+}
+div.nav-agr ul li.active{
+    background-color: #84d7bb;
+}
+div.nav-agr ul li:last-child{
+    margin-right: 0;
+}
+div.agreements {
+    margin-left: 25px;
 }
 .agreements h2 {
     text-decoration: underline;
@@ -15,6 +40,7 @@ a {
     border-radius: 20px;
 }
 .agreements div:first-child{
+    margin-top: 40px;
     background-color: #d1f0e5;
 }
 .agreements div h4, h2 {
@@ -34,15 +60,22 @@ div.link-to-year {
 div.link-to-year div{
     display:table-cell;
     background-color: #d8d8d8;
-    border-radius: 5px;
     width: 75px;
     height: 50px;
     font-weight: 600;
+    text-decoration: none;
     vertical-align: middle;
+    border: 1px #818181 solid;
+    border-radius: 5px;
 } 
+div.link-to-year div:hover{
+    text-decoration: underline;
+}
 div.link-to-year div:nth-child(2){
     width: 270px;
+    border: none;
     background-color: #fff;
+    text-decoration: underline;
 } 
 div.links{
     width: 100%;
@@ -59,16 +92,15 @@ div.calendar {
 }
 div.calendar div{
     display:table-row;
-    background-color: #d8d8d8;
-    border-radius: 5px;
     width: 100px;
     height: 100px;
     font-weight: 600;
-    padding: 
-
+    border: 1px #818181 solid;
 } 
 div.calendar div div{
     display:table-cell;
+    background-color: #d8d8d8;
+    border-radius: 5px;
 }
 
 div.calendar div p:first-child {
