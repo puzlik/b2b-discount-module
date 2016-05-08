@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Discount B2B Module</title>
+  <meta charset="utf-8">
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'discount_module/style.css' %}" />
+</head>
+<body>
+<!-- Nav -->
+  <div class="nav-agr">
+   <ul>
+    <li><a href="{% url 'admin:index' %}">Admin</a></li>  
+    <li><a href="{% url 'calendar' %}">Calendar (as JSON)</a></li>
+    <li><a href="{% url 'year-calendar' 2016 %}">Calendar</a></li>
+   </ul>
+  </div>
+</body>
+</html>

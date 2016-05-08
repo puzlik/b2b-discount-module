@@ -6,13 +6,7 @@ from .models import Agreement, Period, Country, Negotiator, Company
 
 def agreement_calendar(request):
 
-    periods_all = Period.objects.prefetch_related('agreement')
-
-    periods = []
-    set_agr = set(periods_all.values_list('agreement__company__id', flat=True))
-    for ind in set_agr:
-        period = periods_all.filter(agreement__company__id=ind)
-        periods.append(period.latest('end_date'))
+    periods = Period.objects.prefetch_related('agreement').filter(status=True)
 
     if request.GET:
         filter_list = ['country', 'negotiator', 'company']
@@ -50,11 +44,9 @@ def year_calendar(request, pk):
 # helpfull defs
 def get_query_filter(sm, ind, periods):
     if sm == 'country':
-        new_periods = [
-            x for x in periods if x.agreement.company.country.id in ind
-        ]
+        new_periods = periods.filter(agreement__company__country__id__in=ind)
     if sm == 'negotiator':
-        new_periods = [x for x in periods if x.agreement.negotiator.id in ind]
+        new_periods = periods.filter(agreement__negotiator__id__in=ind)
     if sm == 'company':
-        new_periods = [x for x in periods if x.agreement.company.id in ind]
+        new_periods = periods.filter(agreement__company__id__in=ind)
     return new_periods
